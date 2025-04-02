@@ -9,9 +9,9 @@ const props = defineProps({
   }
 })
 
-const imageUrl = computed(
-    () => new URL(`${props.extension?.logo}`, import.meta.url)
-);
+// const imageUrl = computed(
+//     () => new URL(`${props.extension?.logo}`, import.meta.url)
+// );
 
 const imagePath = computed(() => {
   return function (arg) {
@@ -21,6 +21,10 @@ const imagePath = computed(() => {
     return imageUrl
   }
 })
+
+const imageUrl = computed(() => {
+  return `${import.meta.env.BASE_URL}images/${props.extension.logo}.svg`;
+});
 
 const emit = defineEmits(['update:activeState'])
 
@@ -39,6 +43,7 @@ const removeExtension = () => {
   <div class="flex flex-col justify-between rounded-lg bg-white dark:bg-neutral-800 border p-4">
     <div class="flex gap-3">
       <img :src="imagePath(extension.logo)" :alt="extension.name">
+      <img :src="imageUrl" :alt="extension.name">
       <div>
         <h2 class="font-bold text-lg text-neutral-900 dark:text-neutral-100">{{ extension.name }}</h2>
         <p class="text-neutral-600 dark:text-neutral-200">{{ extension.description }}</p>
