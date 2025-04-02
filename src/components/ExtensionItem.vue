@@ -10,8 +10,16 @@ const props = defineProps({
 })
 
 const imageUrl = computed(
-    () => new URL(`${props.extension?.logo}`, import.meta.url).href
+    () => new URL(`${props.extension?.logo}`, import.meta.url)
 );
+
+// const imagePath = computed(() => {
+//     const imageUrl = new URL(`/assets/${props.extension?.logo}`, import.meta.url)
+//         .href
+//
+//     return imageUrl
+//
+// })
 
 
 const emit = defineEmits(['update:activeState'])
