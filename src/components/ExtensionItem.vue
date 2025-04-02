@@ -1,5 +1,5 @@
 <script setup>
-import {ref, defineProps, defineEmits, watch} from 'vue'
+import {ref, defineProps, defineEmits, watch, computed} from 'vue'
 import Switch from './Switch.vue'
 
 const props = defineProps({
@@ -8,6 +8,11 @@ const props = defineProps({
     required: true
   }
 })
+
+const imageUrl = computed(
+    () => new URL(`${props.extension?.logo}`, import.meta.url).href
+);
+
 
 const emit = defineEmits(['update:activeState'])
 
@@ -25,7 +30,7 @@ const removeExtension = () => {
 <template>
   <div class="flex flex-col justify-between rounded-lg bg-white dark:bg-neutral-800 border p-4">
     <div class="flex gap-3">
-      <img :src="extension.logo" :alt="extension.name">
+      <img :src="imageUrl" :alt="extension.name">
       <div>
         <h2 class="font-bold text-lg text-neutral-900 dark:text-neutral-100">{{ extension.name }}</h2>
         <p class="text-neutral-600 dark:text-neutral-200">{{ extension.description }}</p>

@@ -1,7 +1,14 @@
 import { defineConfig } from 'vite'
+import { fileURLToPath, URL } from 'node:url'
 import vue from '@vitejs/plugin-vue'
+// import path from 'path'
 
 export default defineConfig({
     plugins: [vue()],
-    base: '/frontendmentor-browser-extensions-manager-ui/', // Add this line
+    resolve: {
+        alias: {
+            '@': fileURLToPath(new URL('./src', import.meta.url)) // Alias for src folder
+        }
+    },
+    // base: '/frontendmentor-browser-extensions-manager-ui/', // Add this line
 })
